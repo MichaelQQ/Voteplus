@@ -1,0 +1,17 @@
+<div class="container" ng-controller="DashboardCtrl">
+  <div class="row">
+    <div class="col-md-4">
+      <form>
+        <h2>New Poll</h2>
+        <p>Name your poll</p>
+        <input type="text" placeholder="what is your favorite brand?"></input>
+        <p>Options</p>
+        <div ng-repeat="opt in options track by $index">
+            <input type="text" placeholder="{{opt}}"></input>
+        </div>
+        <button ng-click="addOption()" class='btn btn-default'>More Options</button>
+        <button class='btn btn-success'>Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

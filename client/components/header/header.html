@@ -1,0 +1,15 @@
+<header class="hero-unit" id="banner" ng-controller="HeaderCtrl">
+  <div class="container">
+    <h1 ng-hide="isLoggedIn()">Vote+</h1>
+    <h1 ng-show="isLoggedIn()">Dashboard</h1>
+    <p class="lead" ng-hide="isLoggedIn()">Create custom polls with live results.</p>
+    <p class="lead" ng-show="isLoggedIn()">What would you like to do today?</p>
+    <div ng-hide="isLoggedIn()">
+      <ng-button class="btn btn-success">Sign Up</ng-button>
+    </div>
+    <div ng-show="isLoggedIn()">
+      <ng-button class="btn btn-success">New Poll</ng-button>
+      <ng-button class="btn btn-success">My Polls</ng-button>
+    </div>
+  </div>
+</header>
