@@ -1,17 +1,26 @@
 <div class="container" ng-controller="DashboardCtrl">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <form>
         <h2>New Poll</h2>
         <p>Name your poll</p>
-        <input type="text" placeholder="what is your favorite brand?"></input>
+        <input type="text" placeholder="what is your favorite brand?" ng-model="newPoll"></input>
         <p>Options</p>
         <div ng-repeat="opt in options track by $index">
             <input type="text" placeholder="{{opt}}"></input>
         </div>
         <button ng-click="addOption()" class='btn btn-default'>More Options</button>
+        <p>option length: {{options.length}}</p>
         <button class='btn btn-success'>Submit</button>
+        <input type="submit" ng-click="addPoll()" value="Save" />
       </form>
+    </div>
+    <div class="col-md-6">
+      <h2>polls</h2>
+      <div ng-repeat="poll in polls">
+          <input type="submit" class='btn' value="{{ poll.name }}, {{poll.owner}}"></input>
+          <input type="submit" class='btn btn-danger' value="Delete" ng-click="deletePoll(poll)"></input>
+      </div>
     </div>
   </div>
 </div>
