@@ -2,7 +2,26 @@
 
 <div ng-include="'components/header/header.html'"></div>
 
-<div ng-include="'components/dashboard/dashboard.html'"></div>
+<div class="container" ng-hide="isLoggedIn()" style="padding-top: 50px">
+  <div class="row">
+    <div class="text-center col-md-4">
+      <i class="fa fa-bolt fa-5x" style="color: #faea73"></i>
+      <h2>Live Results</h2>  
+      <p>Live graphs show your poll results immediately in easy to an easy to understand format. One graph will not provide the whole picture, that's why we provide multiple graph types to better describe your results.</p>
+    </div>
+    <div class="text-center col-md-4">
+      <i class="fa fa-globe fa-5x" style="color: #5cb85c"></i>
+      <h2>Works Everywhere</h2>
+      <p>Traditional desktop computers now represent only 30% of Internet traffic. Your poll must work on the tablets, smart phones, netbooks and notebooks that your visitors are using. Our responsive designs do just that.</p>
+    </div>
+    <div class="text-center col-md-4">
+      <i class="fa fa-facebook fa-5x" style="color: #4393b9"></i>
+      <h2>Social Integration</h2>
+      <p>Free integrated facebook or traditional comments allow your poll voters to provide immediate feedback and discuss results. Social share buttons encourage your poll voters to help spread the word.</p>
+    </div>
+  </div>
+</div>
+<div ng-show="isLoggedIn()" ng-include="'components/dashboard/dashboard.html'"></div>
 
 <footer class="footer">
   <div class="container">

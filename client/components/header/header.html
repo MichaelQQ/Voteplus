@@ -5,11 +5,11 @@
     <p class="lead" ng-hide="isLoggedIn()">Create custom polls with live results.</p>
     <p class="lead" ng-show="isLoggedIn()">What would you like to do today?</p>
     <div ng-hide="isLoggedIn()">
-      <ng-button class="btn btn-success">Sign Up</ng-button>
+      <ng-button class="btn btn-success btn-lg">Sign Up</ng-button>
     </div>
     <div ng-show="isLoggedIn()">
-      <ng-button class="btn btn-success">New Poll</ng-button>
-      <ng-button class="btn btn-success">My Polls</ng-button>
+      <ng-button ng-click="toActive(0)" ng-class="isActive(0) ? 'btn btn-success btn-lg active' : 'btn btn-success btn-lg'">New Poll</ng-button>
+      <ng-button ng-click="toActive(1)" ng-class="isActive(1) ? 'btn btn-primary btn-lg active' : 'btn btn-primary btn-lg'">My Polls</ng-button>
     </div>
   </div>
 </header>

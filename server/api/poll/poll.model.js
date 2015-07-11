@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 
 var PollSchema = new Schema({
   name: String,
-  owner: Schema.Types.ObjectId
+  owner: Schema.Types.ObjectId,
+  option: Array
 }, { strict: false });
 
 module.exports = mongoose.model('Poll', PollSchema);

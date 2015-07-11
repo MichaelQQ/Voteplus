@@ -33,5 +33,5 @@ angular.module('workspaceApp')
             return cb(err);
           }.bind(this)).$promise;
       }
-    };*/
-  });
+    };
+  });*/

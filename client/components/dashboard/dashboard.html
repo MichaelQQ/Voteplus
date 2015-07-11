@@ -1,24 +1,32 @@
 <div class="container" ng-controller="DashboardCtrl">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4 col-md-offset-4 text-center">
       <form>
         <h2>New Poll</h2>
-        <p>Name your poll</p>
-        <input type="text" placeholder="what is your favorite brand?" ng-model="newPoll"></input>
-        <p>Options</p>
-        <div ng-repeat="opt in options track by $index">
-            <input type="text" placeholder="{{opt}}"></input>
+        <div class="form-group">
+          <label>Name your poll</label>
+          <input type="text" class="form-control" placeholder="what is your favorite brand?" ng-model="newPoll" required/>
         </div>
-        <button ng-click="addOption()" class='btn btn-default'>More Options</button>
-        <p>option length: {{options.length}}</p>
-        <button class='btn btn-success'>Submit</button>
-        <input type="submit" ng-click="addPoll()" value="Save" />
+        <div class="form-group">
+          <label>Options</label>
+          <input type="text" class="form-control" ng-model="options[0].name" placeholder="pespi" required/>
+          <input type="text" class="form-control" ng-model="options[1].name" placeholder="Coca-Cola" required/>
+          <div ng-repeat="i in getNumber() track by $index">
+              <input type="text" class="form-control" ng-model="options[$index+2].name" placeholder="New Option" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center">
+            <input type="button" ng-click="addOption()" class='btn btn-default btn-block' value="More Options" />
+            <input type="submit" ng-click="addPoll()" class='btn btn-success btn-block' value="Submit" />
+          </div>
+        </div>
       </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4 col-md-offset-4 text-center">
       <h2>polls</h2>
       <div ng-repeat="poll in polls">
-          <input type="submit" class='btn' value="{{ poll.name }}, {{poll.owner}}"></input>
+          <input type="submit" class='btn' value="{{ poll }}"></input><br>
           <input type="submit" class='btn btn-danger' value="Delete" ng-click="deletePoll(poll)"></input>
       </div>
     </div>

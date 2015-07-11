@@ -1,19 +1,22 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('DashboardCtrl', function ($scope, $location, Auth, $http) {
+  .controller('DashboardCtrl', function ($rootScope, $scope, $location, Auth, $http) {
     
-    $scope.options = ["pespi","Coca-Cola"];
+    $scope.options = [];
     $scope.polls = [];
-    $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn();
     $scope.isAdmin = Auth.isAdmin();
     $scope.getCurrentUser = Auth.getCurrentUser();
+    $scope.index = 0;
+    $scope.active = $rootScope.header;
 
+    $scope.getNumber = function(){
+      return new Array($scope.index);
+    }
     
     $scope.addOption = function(){
-      var placehoder = "New Option";
-      $scope.options.push(placehoder);
+      $scope.index++;
     };
     
     
@@ -22,14 +25,19 @@ angular.module('workspaceApp')
     });
 
     $scope.addPoll = function() {
+      $scope.options.forEach(function(value){
+        value.count = 0;
+      });
       if($scope.newPoll === '') {
         return;
       }
       $http.post('/api/poll', { 
         name: $scope.newPoll,
-        owner: $scope.getCurrentUser._id
+        owner: $scope.getCurrentUser._id,
+        option: $scope.options
       });
       $scope.newPoll = '';
+      $scope.options = [];
       reflashPoll();
     };
 
@@ -44,14 +52,4 @@ angular.module('workspaceApp')
       reflashPoll();
     };
 
-    
-
-    $scope.logout = function() {
-      Auth.logout();
-      $location.path('/login');
-    };
-
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    };
   });

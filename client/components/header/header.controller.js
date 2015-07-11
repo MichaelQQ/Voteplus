@@ -1,23 +1,31 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('HeaderCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
+  .controller('HeaderCtrl', function ($rootScope, $scope, $location, Auth) {
 
-    $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
-
-    $scope.logout = function() {
-      Auth.logout();
-      $location.path('/login');
+    $scope.active = 0;
+    $scope.buttons = [
+      {
+        name: "New Poll",
+        active: true
+      },
+      {
+        name: "My Polls",
+        active: false
+      }];
+    $rootScope.header = 0;
+    
+    
+    $scope.toActive = function(n){
+      $scope.buttons[$scope.active].active = false;
+      $scope.active = n;
+      $scope.buttons[n].active = true;
+      $rootScope.header = $scope.active;
     };
-
-    $scope.isActive = function(route) {
-      return route === $location.path();
+    
+    $scope.isActive = function(n){
+      return $scope.buttons[n].active;
     };
+    
   });
