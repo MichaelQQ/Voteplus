@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('HeaderCtrl', function ($rootScope, $scope, $location, Auth) {
+  .controller('HeaderCtrl', function ($scope, $location, Auth) {
 
     $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.active = 0;
+    //$scope.active = 0;
     $scope.buttons = [
       {
         name: "New Poll",
@@ -14,14 +14,12 @@ angular.module('workspaceApp')
         name: "My Polls",
         active: false
       }];
-    $rootScope.header = 0;
     
     
     $scope.toActive = function(n){
       $scope.buttons[$scope.active].active = false;
-      $scope.active = n;
+      $scope.setActive(n);
       $scope.buttons[n].active = true;
-      $rootScope.header = $scope.active;
     };
     
     $scope.isActive = function(n){

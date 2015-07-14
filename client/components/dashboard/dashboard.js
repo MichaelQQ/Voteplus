@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('DashboardCtrl', function ($rootScope, $scope, $location, Auth, $http) {
+  .controller('DashboardCtrl', function ($scope, $location, Auth, $http) {
     
     $scope.options = [];
     $scope.polls = [];
@@ -9,7 +9,6 @@ angular.module('workspaceApp')
     $scope.isAdmin = Auth.isAdmin();
     $scope.getCurrentUser = Auth.getCurrentUser();
     $scope.index = 0;
-    $scope.active = $rootScope.header;
 
     $scope.getNumber = function(){
       return new Array($scope.index);
@@ -24,13 +23,15 @@ angular.module('workspaceApp')
       $scope.polls = poll;
     });
 
-    $scope.addPoll = function() {
+    $scope.addPoll = function(isValid) {
+      /*if($scope.newPoll === '') {
+        return;
+      }*/
+      if(!isValid)
+        return;
       $scope.options.forEach(function(value){
         value.count = 0;
       });
-      if($scope.newPoll === '') {
-        return;
-      }
       $http.post('/api/poll', { 
         name: $scope.newPoll,
         owner: $scope.getCurrentUser._id,
