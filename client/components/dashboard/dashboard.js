@@ -4,29 +4,31 @@ angular.module('workspaceApp')
   .controller('DashboardCtrl', function ($scope, $location, Auth, $http) {
     
     $scope.options = [];
-    $scope.polls = [];
-    $scope.isLoggedIn = Auth.isLoggedIn();
-    $scope.isAdmin = Auth.isAdmin();
-    $scope.getCurrentUser = Auth.getCurrentUser();
+    $scope.polls;
     $scope.index = 0;
-
+    $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.gotPolls = false;
+    
+    $scope.$watch('active', function () {
+      if($scope.active == 1) { 
+        if($scope.gotPolls == false){
+          $http.get('/api/poll/'+ $scope.getCurrentUser()._id).success(function(poll) {
+            $scope.polls = poll;
+            $scope.gotPolls = true;
+          });
+        }
+      }
+    });
+    
     $scope.getNumber = function(){
       return new Array($scope.index);
-    }
+    };
     
     $scope.addOption = function(){
       $scope.index++;
     };
-    
-    
-    $http.get('/api/poll').success(function(poll) {
-      $scope.polls = poll;
-    });
 
     $scope.addPoll = function(isValid) {
-      /*if($scope.newPoll === '') {
-        return;
-      }*/
       if(!isValid)
         return;
       $scope.options.forEach(function(value){
@@ -34,7 +36,7 @@ angular.module('workspaceApp')
       });
       $http.post('/api/poll', { 
         name: $scope.newPoll,
-        owner: $scope.getCurrentUser._id,
+        owner: $scope.getCurrentUser()._id,
         option: $scope.options
       });
       $scope.newPoll = '';
@@ -43,7 +45,7 @@ angular.module('workspaceApp')
     };
 
     var reflashPoll = function(){
-      $http.get('/api/poll').success(function(poll) {
+      $http.get('/api/poll/'+ $scope.getCurrentUser()._id).success(function(poll) {
         $scope.polls = poll;
       });
     };

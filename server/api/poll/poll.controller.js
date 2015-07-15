@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Poll = require('./poll.model');
+var User = require('../user/user.model');
 
 // Get list of polls
 exports.index = function(req, res) {
@@ -20,9 +21,9 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single poll
+// Get a single user's polls
 exports.show = function(req, res) {
-  Poll.findById(req.params.id, function (err, poll) {
+  Poll.findByOwner(req.params.id, function (err, poll) {
     if(err) { return handleError(res, err); }
     if(!poll) { return res.send(404); }
     return res.json(poll);
