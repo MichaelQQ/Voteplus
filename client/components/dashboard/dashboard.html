@@ -23,14 +23,12 @@
         </div>
       </form>
     </div>
-    <div ng-show="active === 1" ><!-- class="col-md-4 col-md-offset-4 text-center"> -->
+    <div ng-show="active === 1" class="col-md-4 col-md-offset-4 text-center">
       <h2>My Polls</h2>
       <div ng-repeat="poll in polls">
-        <div class="col-md-4">
-          <pre>{{ poll | json }}</pre>
-            <!--<input type="submit" value="{{ poll | json }}"></input><br>-->
-          <input type="submit" class='btn btn-danger' value="Delete" ng-click="deletePoll(poll)"></input>
-        </div>
+        <button class="btn btn-default btn-block" ><strong>{{ poll.name }}</strong> | {{ poll.expired | date:'medium' }} 
+          <input type="submit" class='btn btn-danger' value="Delete" ng-click="deletePoll(poll)" />
+        </button>
       </div>
     </div>
   </div>
