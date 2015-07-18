@@ -4,14 +4,14 @@ angular.module('workspaceApp')
   .controller('DashboardCtrl', function ($scope, $location, Auth, $http) {
     
     $scope.options = [];
-    $scope.polls;
+    $scope.polls = [];
     $scope.index = 0;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.gotPolls = false;
     
     $scope.$watch('active', function () {
-      if($scope.active == 1) { 
-        if($scope.gotPolls == false){
+      if($scope.active === 1) { 
+        if($scope.gotPolls === false){
           $http.get('/api/poll/'+ $scope.getCurrentUser()._id).success(function(poll) {
             $scope.polls = poll;
             $scope.gotPolls = true;
@@ -29,8 +29,9 @@ angular.module('workspaceApp')
     };
 
     $scope.addPoll = function(isValid) {
-      if(!isValid)
+      if(!isValid){
         return;
+      }
       $scope.options.forEach(function(value){
         value.count = 0;
       });

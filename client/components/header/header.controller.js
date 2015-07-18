@@ -7,11 +7,11 @@ angular.module('workspaceApp')
     //$scope.active = 0;
     $scope.buttons = [
       {
-        name: "New Poll",
+        name: 'New Poll',
         active: true
       },
       {
-        name: "My Polls",
+        name: 'My Polls',
         active: false
       }];
     
@@ -25,5 +25,11 @@ angular.module('workspaceApp')
     $scope.isActive = function(n){
       return $scope.buttons[n].active;
     };
+    
+    $scope.inLogin = function(){
+      if($location.path() === '/login' || $location.path() === '/signup'){
+        return true;
+      }
+    }
     
   });

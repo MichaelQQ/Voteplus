@@ -4,7 +4,7 @@ angular.module('workspaceApp')
 // Service
     .factory('Poll', ['$http', function($http){
       return $http.get('/polls');
-    }])
+    }]);
   //.factory('Poll', function Poll($location, $rootScope, $http, User, $cookieStore, $q) {
     /*var currentUser = {};
     if($cookieStore.get('token')) {
