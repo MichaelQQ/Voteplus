@@ -26,9 +26,11 @@
     <div ng-show="active === 1" class="col-md-4 col-md-offset-4 text-center">
       <h2>My Polls</h2>
       <div ng-repeat="poll in polls">
-        <button class="btn btn-default btn-block" ><strong>{{ poll.name }}</strong> | {{ poll.expired | date:'medium' }} 
-          <input type="submit" class='btn btn-danger' value="Delete" ng-click="deletePoll(poll)" />
-        </button>
+        <a href="/poll/{{poll._id}}">
+          <button class="btn btn-default btn-block text-justify"><strong>{{ poll.name }}</strong> | {{ poll.expired | date:'medium' }} 
+            <input type="submit" class='btn btn-danger' value="Delete" ng-click="deletePoll(poll)" />
+          </button>
+        </a>
       </div>
     </div>
   </div>

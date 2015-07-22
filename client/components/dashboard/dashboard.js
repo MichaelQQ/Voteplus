@@ -12,7 +12,7 @@ angular.module('workspaceApp')
     $scope.$watch('active', function () {
       if($scope.active === 1) { 
         if($scope.gotPolls === false){
-          $http.get('/api/poll/'+ $scope.getCurrentUser()._id).success(function(poll) {
+          $http.get('/api/poll/user/'+ $scope.getCurrentUser()._id).success(function(poll) {
             $scope.polls = poll;
             $scope.gotPolls = true;
           });
@@ -35,18 +35,19 @@ angular.module('workspaceApp')
       $scope.options.forEach(function(value){
         value.count = 0;
       });
-      $http.post('/api/poll', { 
+      var newpoll = { 
         name: $scope.newPoll,
         owner: $scope.getCurrentUser()._id,
         option: $scope.options
-      });
+      };
+      $http.post('/api/poll', newpoll);
+      $scope.polls.push(newpoll);
       $scope.newPoll = '';
       $scope.options = [];
-      reflashPoll();
     };
 
     var reflashPoll = function(){
-      $http.get('/api/poll/'+ $scope.getCurrentUser()._id).success(function(poll) {
+      $http.get('/api/poll/user/'+ $scope.getCurrentUser()._id).success(function(poll) {
         $scope.polls = poll;
       });
     };

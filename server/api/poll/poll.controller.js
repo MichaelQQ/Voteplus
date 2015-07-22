@@ -21,8 +21,17 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single user's polls
+// Get a single poll
 exports.show = function(req, res) {
+  Poll.findById(req.params.id, function (err, poll) {
+    if(err) { return handleError(res, err); }
+    if(!poll) { return res.send(404); }
+    return res.json(poll);
+  });
+};
+
+// Get a single user's polls
+exports.showUser = function(req, res) {
   Poll.findByOwner(req.params.id, function (err, poll) {
     if(err) { return handleError(res, err); }
     if(!poll) { return res.send(404); }

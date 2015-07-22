@@ -1,0 +1,22 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div ng-include="'components/header/header.html'"></div>
+
+<div class="container" ng-controller="PollCtrl">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h1>{{ poll.name }}</h1>
+        <ul>
+            <li>Owner: {{ owner }}</li>
+            <li>Create Date: {{poll.date | date }}</li>
+            <li>Expired time: {{ poll.expired | date }}</li>
+            <ul>
+            <div ng-repeat="option in poll.option">
+                <li>{{ option.name }} | count: {{ option.count }}</li>
+            </div>
+            </ul>
+        </ul>
+    </div>
+  </div>
+  <hr>
+</div>

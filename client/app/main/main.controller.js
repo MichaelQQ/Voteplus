@@ -6,7 +6,7 @@ angular.module('workspaceApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.active = 0;
 
-    $http.get('/api/things').success(function(awesomeThings) {
+    /*$http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
     });
 
@@ -20,7 +20,7 @@ angular.module('workspaceApp')
 
     $scope.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);
-    };
+    };*/
     
     $scope.setActive = function(n){
       $scope.active = n;
