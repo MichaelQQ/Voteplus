@@ -9,6 +9,7 @@ angular.module('workspaceApp')
       });
   })
   .controller('PollCtrl', function ($scope, $location, Auth, $http, $routeParams) {
+    $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.poll = {};
     $scope.owner = '';
       

@@ -2,7 +2,7 @@
 
 <div ng-include="'components/header/header.html'"></div>
 
-<div class="container" ng-controller="PollCtrl">
+<div class="container" ng-controller="PollCtrl" ng-show="isLoggedIn()">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <h1>{{ poll.name }}</h1>
@@ -18,5 +18,4 @@
         </ul>
     </div>
   </div>
-  <hr>
 </div>

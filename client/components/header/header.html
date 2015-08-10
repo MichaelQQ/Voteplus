@@ -8,8 +8,8 @@
       <a href="/login" ><ng-button ng-hide="inLogin()" class="btn btn-success btn-lg" >Sign Up</ng-button></a>
     </div>
     <div ng-show="isLoggedIn()">
-      <ng-button ng-click="toActive(0)" ng-class="isActive(0) ? 'btn btn-success btn-lg active' : 'btn btn-success btn-lg'">New Poll</ng-button>
-      <ng-button ng-click="toActive(1)" ng-class="isActive(1) ? 'btn btn-primary btn-lg active' : 'btn btn-primary btn-lg'">My Polls</ng-button>
+      <ng-button ng-click="new()" ng-class="inNewPoll() ? 'btn btn-success btn-lg active' : 'btn btn-success btn-lg'">New Poll</ng-button>
+      <ng-button ng-click="mypoll()" ng-class="inMyPoll() ? 'btn btn-primary btn-lg active' : 'btn btn-primary btn-lg'">My Polls</ng-button>
     </div>
   </div>
 </header>

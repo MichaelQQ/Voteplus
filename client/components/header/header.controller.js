@@ -16,7 +16,7 @@ angular.module('workspaceApp')
       }];
     
     
-    $scope.toActive = function(n){
+    /*$scope.toActive = function(n){
       $scope.buttons[$scope.active].active = false;
       $scope.setActive(n);
       $scope.buttons[n].active = true;
@@ -24,12 +24,32 @@ angular.module('workspaceApp')
     
     $scope.isActive = function(n){
       return $scope.buttons[n].active;
+    };*/
+    
+    $scope.inNewPoll = function(){
+      if($location.path() === '/poll/new'){
+        return true;
+      }
+    };
+    
+    $scope.inMyPoll = function(){
+      if($location.path() === '/poll/mypoll'){
+        return true;
+      }
     };
     
     $scope.inLogin = function(){
       if($location.path() === '/login' || $location.path() === '/signup'){
         return true;
       }
-    }
+    };
+    
+    $scope.new = function() {
+      $location.path('/poll/new');
+    };
+    
+    $scope.mypoll = function() {
+      $location.path('/poll/mypoll');
+    };
     
   });

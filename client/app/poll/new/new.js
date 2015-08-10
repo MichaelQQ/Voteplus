@@ -1,26 +1,21 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('DashboardCtrl', function ($scope, $location, Auth, $http) {
-    
+  .config(function ($routeProvider) {
+    $routeProvider
+      .when('/poll/new', {
+          templateUrl: 'app/poll/new/new.html',
+          controller: 'NewPollCtrl'
+      });
+  })
+  .controller('NewPollCtrl', function ($scope, $location, Auth, $http) {
+
     $scope.options = [];
     $scope.polls = [];
     $scope.index = 0;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.gotPolls = false;
-    
-    $scope.$watch('active', function () {
-      if($scope.active === 1) { 
-        if($scope.gotPolls === false){
-          $http.get('/api/poll/user/'+ $scope.getCurrentUser()._id).success(function(poll) {
-            $scope.polls = poll;
-            $scope.gotPolls = true;
-          });
-        }
-      }
-    });
-    
+      
     $scope.getNumber = function(){
       return new Array($scope.index);
     };
@@ -46,16 +41,4 @@ angular.module('workspaceApp')
       $scope.newPoll = '';
       $scope.options = [];
     };
-
-    var reflashPoll = function(){
-      $http.get('/api/poll/user/'+ $scope.getCurrentUser()._id).success(function(poll) {
-        $scope.polls = poll;
-      });
-    };
-
-    $scope.deletePoll = function(poll) {
-      $http.delete('/api/poll/' + poll._id);
-      reflashPoll();
-    };
-
   });
