@@ -14,6 +14,35 @@ angular.module('workspaceApp')
     $scope.poll = {};
     $scope.owner = '';
     $scope.decsion = '';
+
+    var labels = [];
+    var datas = [];
+    
+    function setChartData(){
+      for(var i=0; i<$scope.poll.option.length; i++){
+        labels.push($scope.poll.option[i].name);
+        datas.push($scope.poll.option[i].count);
+      }
+    }
+    
+    function createChart(){
+      var data = {
+        labels: labels,
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: datas
+            }
+        ]
+      };
+    // Get the context of the canvas element we want to select
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var myNewChart = new Chart(ctx).Bar(data);
+    }
     
     $scope.voted = function(){
       for(var i=0; i<$scope.poll.member.length; i++){
@@ -33,22 +62,14 @@ angular.module('workspaceApp')
         $scope.poll = updatedpoll;
       });
       $scope.decsion = '';
-      //$scope.refresh();
-    };
-    
-    $scope.refresh = function(){
-      $http.get('/api/poll/'+ $routeParams.id).success(function(poll) {
-        $scope.poll = poll;
-        $http.get('/api/users/'+ poll.owner).success(function(user) {
-            $scope.owner = user.name;
-        });
-      });
     };
       
     $http.get('/api/poll/'+ $routeParams.id).success(function(poll) {
         $scope.poll = poll;
         $http.get('/api/users/'+ poll.owner).success(function(user) {
             $scope.owner = user.name;
+            setChartData();
+            createChart();
         });
     });
       

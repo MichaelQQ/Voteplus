@@ -26,7 +26,7 @@ angular.module('workspaceApp')
 
     $scope.deletePoll = function(poll) {
       $http.delete('/api/poll/' + poll._id);
-      reflashPoll();
+      $location.path('/poll/mypoll');
     };
 
   });

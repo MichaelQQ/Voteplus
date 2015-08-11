@@ -5,8 +5,9 @@
 <div class="container" ng-controller="PollCtrl" >
   <div class="row">
     <div class="col-md-4 col-md-offset-4" ng-show="isLoggedIn() && voted()">
-        <h1>{{ poll.name }}</h1>
-        <ul>
+        <h1>{{ poll.name }} (host: {{ owner }})</h1>
+        <canvas id="myChart" height="350px" ></canvas>
+        <!--<ul>
             <li>Owner: {{ owner }}</li>
             <li>Create Date: {{poll.date | date }}</li>
             <li>Expired time: {{ poll.expired | date }}</li>
@@ -15,7 +16,7 @@
                 <li>{{ option.name }} | count: {{ option.count }}</li>
             </div>
             </ul>
-        </ul>
+        </ul>-->
     </div>
     <div class="col-md-4 col-md-offset-4" ng-show="isLoggedIn() && !voted()">
         <h1>{{ poll.name }}</h1>
