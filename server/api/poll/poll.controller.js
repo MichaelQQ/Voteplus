@@ -55,8 +55,10 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!poll) { return res.send(404); }
     //var updated = _.merge(poll, req.body);
+    poll.member.push(req.body.voter);
     vote(req.body.descion, poll.option);
-    console.log("updated " + poll);
+    
+    poll.markModified("member");
     poll.markModified("option");
     poll.save(function (err) {
       if (err) { return handleError(res, err); }

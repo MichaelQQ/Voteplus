@@ -10,13 +10,25 @@ angular.module('workspaceApp')
   })
   .controller('PollCtrl', function ($scope, $location, Auth, $http, $routeParams) {
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.poll = {};
     $scope.owner = '';
     $scope.decsion = '';
     
+    $scope.voted = function(){
+      for(var i=0; i<$scope.poll.member.length; i++){
+        if($scope.poll.member[i] === $scope.getCurrentUser()._id)
+          return true;
+      }
+      return false;
+    };
+    
     $scope.update = function(descion){
       $scope.descion = descion;
-      var vote = { descion : $scope.descion };
+      var vote = { 
+        descion : $scope.descion,
+        voter: $scope.getCurrentUser()._id
+      };
       $http.patch('/api/poll/' + $routeParams.id, vote).success(function(updatedpoll){
         $scope.poll = updatedpoll;
       });
