@@ -49,18 +49,31 @@ exports.create = function(req, res) {
 };
 
 // Updates an existing poll in the DB.
-/*exports.update = function(req, res) {
+exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  poll.findById(req.params.id, function (err, poll) {
+  Poll.findById(req.params.id, function (err, poll) {
     if (err) { return handleError(res, err); }
     if(!poll) { return res.send(404); }
-    var updated = _.merge(poll, req.body);
-    updated.save(function (err) {
+    //var updated = _.merge(poll, req.body);
+    vote(req.body.descion, poll.option);
+    console.log("updated " + poll);
+    poll.markModified("option");
+    poll.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, poll);
     });
+    return poll;
   });
-};*/
+};
+
+function vote(target, array){
+  for(var i=0; i< array.length; i++){
+    if(array[i].name === target){
+      array[i].count++;
+      break;
+    }
+  }
+}
 
 // Deletes a poll from the DB.
 exports.destroy = function(req, res) {

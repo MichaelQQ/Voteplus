@@ -4,7 +4,7 @@
 
 <div class="container" ng-controller="PollCtrl" ng-show="isLoggedIn()">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-3 col-md-offset-3">
         <h1>{{ poll.name }}</h1>
         <ul>
             <li>Owner: {{ owner }}</li>
@@ -16,6 +16,15 @@
             </div>
             </ul>
         </ul>
+    </div>
+    <div class="col-md-3">
+        <h1>{{ poll.name }}</h1>
+        <form novalidate>
+            <div ng-repeat="option in poll.option" class="btn btn-default btn-block">
+                <input type="radio" ng-model="$parent.descion" value="{{ option.name }}" /> {{ option.name }}
+            </div>
+            <input type="submit" ng-click="update(descion)" value="Vote" />
+        </form>
     </div>
   </div>
 </div>
