@@ -17,16 +17,14 @@ angular.module('workspaceApp')
     $http.get('/api/poll/user/'+ $scope.getCurrentUser()._id).success(function(poll) {
       $scope.polls = poll;
     });
-          
-    var reflashPoll = function(){
-      $http.get('/api/poll/user/'+ $scope.getCurrentUser()._id).success(function(poll) {
-        $scope.polls = poll;
-      });
-    };
 
     $scope.deletePoll = function(poll) {
       $http.delete('/api/poll/' + poll._id);
-      $location.path('/poll/mypoll');
+      for(var i=0; i<$scope.polls.length; i++){
+        if($scope.polls[i]._id === poll._id){
+           $scope.polls.splice(i, 1);
+        }
+      }
     };
 
   });

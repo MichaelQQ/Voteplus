@@ -30,24 +30,25 @@ angular.module('workspaceApp')
         labels: labels,
         datasets: [
             {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
+                label: 'My First dataset',
+                fillColor: 'rgba(220,220,220,0.5)',
+                strokeColor: 'rgba(220,220,220,0.8)',
+                highlightFill: 'rgba(220,220,220,0.75)',
+                highlightStroke: 'rgba(220,220,220,1)',
                 data: datas
             }
         ]
       };
     // Get the context of the canvas element we want to select
-      var ctx = document.getElementById("myChart").getContext("2d");
+      var ctx = document.getElementById('myChart').getContext('2d');
       var myNewChart = new Chart(ctx).Bar(data);
     }
     
     $scope.voted = function(){
       for(var i=0; i<$scope.poll.member.length; i++){
-        if($scope.poll.member[i] === $scope.getCurrentUser()._id)
+        if($scope.poll.member[i] === $scope.getCurrentUser()._id) {
           return true;
+        }
       }
       return false;
     };
@@ -62,6 +63,7 @@ angular.module('workspaceApp')
         $scope.poll = updatedpoll;
       });
       $scope.decsion = '';
+      $location.path('/poll/' + $routeParams.id);
     };
       
     $http.get('/api/poll/'+ $routeParams.id).success(function(poll) {

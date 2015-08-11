@@ -15,6 +15,9 @@ angular.module('workspaceApp')
     $scope.index = 0;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.success = false;
+    $scope.link = 'http://fs2-fcc.herokuapp.com/poll/';
+    $scope.resp;
       
     $scope.getNumber = function(){
       return new Array($scope.index);
@@ -36,7 +39,10 @@ angular.module('workspaceApp')
         owner: $scope.getCurrentUser()._id,
         option: $scope.options
       };
-      $http.post('/api/poll', newpoll);
+      $http.post('/api/poll', newpoll).success(function(res){
+        $scope.success = true;
+        $scope.link += res._id;
+      });
       $scope.polls.push(newpoll);
       $scope.newPoll = '';
       $scope.options = [];

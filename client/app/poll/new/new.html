@@ -4,7 +4,7 @@
 
 <div class="container" ng-controller="NewPollCtrl">
   <div class="row">
-    <div class="col-md-4 col-md-offset-4 text-center">
+    <div class="col-md-4 col-md-offset-4 text-center" ng-hide="success">
       <form name="pollForm" ng-submit="addPoll(pollForm.$valid)" novalidate >
         <h2>New Poll</h2>
         <div class="form-group">
@@ -26,6 +26,10 @@
           </div>
         </div>
       </form>
+    </div>
+    <div class="col-md-4 col-md-offset-4 text-center" ng-show="success">
+      <h1>Create Successful!!</h1>
+      <p>share with friends: <a href="{{ link }}">{{link}}</a></p>
     </div>
   </div>
 </div>
